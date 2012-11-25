@@ -112,7 +112,7 @@ var browsers = require('mo/browsers');
 * `browsers.rank` -- 
 * `browsers['msie'|'webkit'|'mozilla'|...]` --
 
-### mo/browsers
+### mo/cookie
 
 ```javascript 
 var cookie = require('mo/cookie');
@@ -124,6 +124,7 @@ cookie(name, value, {
     secure: ''
 });
 ```
+
 ### mo/template
 
 ```javascript 

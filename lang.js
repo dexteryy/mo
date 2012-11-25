@@ -379,14 +379,11 @@ define("mo/lang", ["host"], function(host, require, exports){
         function getCallMethod(type){
             return function(){
                 var re, fn;
-                for (var i = 0, l = this.length; i < l; i++) {
-                    fn = this[i];
-                    if (fn) {
-                        re = fn[type].apply(fn, arguments);
-                    } else {
-                        break;
-                    }
+                dup = this.slice().reverse();
+                while (fn = dup.pop()) {
+                    re = fn[type].apply(fn, arguments);
                 }
+                dup = false;
                 return re;
             };
         }
