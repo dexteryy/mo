@@ -8,9 +8,9 @@
  * Copyright (C) 2010-2012, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-define("mo/domready", ["host", "finish"], function(host, finish){
+define("mo/domready", ["finish"], function(finish){
     var loaded, 
-        w = host.window, 
+        w = this, 
         doc = w.document, 
         ADD = "addEventListener",
         IEADD = "attachEvent",

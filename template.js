@@ -7,9 +7,9 @@
  * Copyright (C) 2010-2012, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-define("mo/template", ["mo/lang", "host"], function(_, host, require, exports){
+define("mo/template", ["mo/lang"], function(_, require, exports){
 
-    var document = host.document;
+    var document = this.document;
 
     function escapeHTML(str){
         str = str || '';

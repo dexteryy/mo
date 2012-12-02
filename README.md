@@ -44,7 +44,7 @@ title: Mo
 
 ## Get the code
 
-* [View/download on Github](https://github.com/dexteryy/moui/blob/master/)
+* [View/download on Github](https://github.com/dexteryy/mo/blob/master/)
 * Add/update to your project as new dependency:
     * via [istatic](https://github.com/mockee/istatic.git)
     * via [volo](https://github.com/volojs/volo)
@@ -71,7 +71,6 @@ var _ = require('mo/lang');
 * `_.unique(list)` -- 
 * `_.ns(string, value)` -- 
 * `_.FnQueue()` -- 
-* `_.semver(version1, version2)` -- 
 
 ```javascript 
 // Add ES5 methods in browsers that don't natively support them:
