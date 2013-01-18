@@ -18,6 +18,11 @@ title: Mo
 
 * [mo/lang](https://github.com/dexteryy/mo/blob/master/lang.js): 
     * ES5/6 shim and minimum utilities for language enhancement
+    * [mo/lang/es5](https://github.com/dexteryy/mo/blob/master/lang/es5.js)
+    * [mo/lang/type](https://github.com/dexteryy/mo/blob/master/lang/type.js)
+    * [mo/lang/mix](https://github.com/dexteryy/mo/blob/master/lang/mix.js)
+    * [mo/lang/oop](https://github.com/dexteryy/mo/blob/master/lang/oop.js)
+    * [mo/lang/struct](https://github.com/dexteryy/mo/blob/master/lang/struct.js)
 * [mo/domready](https://github.com/dexteryy/mo/blob/master/domready.js): 
     * Non-plugin implementation of cross-browser DOM ready event
     * Based on OzJS's built-in module -- 'finish'
@@ -27,6 +32,8 @@ title: Mo
     * Simple wrapping for managing cookie 
 * [mo/template](https://github.com/dexteryy/mo/blob/master/template.js): 
     * A lightweight and enhanced micro-template implementation, and minimum utilities
+    * [mo/template/string](https://github.com/dexteryy/mo/blob/master/template/string.js): 
+    * [mo/template/micro](https://github.com/dexteryy/mo/blob/master/template/micro.js): 
 * [mo/network](https://github.com/dexteryy/mo/blob/master/network.js): 
     * Standalone jQuery.ajax API and enhanced getJSON, and so on
 * [mo/easing](https://github.com/dexteryy/mo/blob/master/easing.js): 
@@ -57,23 +64,13 @@ title: Mo
 var _ = require('mo/lang');
 ```
 
-* `_.type(sth)` -- 
-* `_.isFunction(sth)` -- 
-* `_.isWindow(sth)` -- 
-* `_.isEmptyObject(sth)` -- 
-* `_.mix(origin, obj1, obj2, ..., depth)` -- 
-* `_.merge(origin, obj1, obj2, ..., depth)` -- 
-* `_.interset(origin, obj1, obj2, ..., depth)` -- 
-* `_.defaults(origin, obj1, obj2, ..., depth)` -- 
-* `_.copy(origin, depth)` -- 
-* `_.occupy(origin, obj, depth)` -- 
-* `_.config(cfg, opt, DEFAULT_CFG)` -- 
-* `_.unique(list)` -- 
 * `_.ns(string, value)` -- 
-* `_.FnQueue()` -- 
+* same as below
+
+#### mo/lang/es5
 
 ```javascript 
-// Add ES5 methods in browsers that don't natively support them:
+require('mo/lang/es5'); // Add ES5 methods in browsers that don't natively support them
 ```
 
 * `Array.prototype.forEach`
@@ -90,6 +87,49 @@ var _ = require('mo/lang');
 * `Object.create`
 * `Object.getPrototypeOf`
 * `Function.prototype.bind`
+
+#### mo/lang/type
+
+```javascript 
+var _ = require('mo/lang/type');
+```
+
+* `_.type(sth)` -- 
+* `_.isFunction(sth)` -- 
+* `_.isWindow(sth)` -- 
+* `_.isEmptyObject(sth)` -- 
+
+#### mo/lang/mix
+
+```javascript 
+var _ = require('mo/lang/mix');
+```
+
+* `_.mix(origin, obj1, obj2, ..., depth)` -- 
+* `_.merge(origin, obj1, obj2, ..., depth)` -- 
+* `_.interset(origin, obj1, obj2, ..., depth)` -- 
+* `_.copy(origin, depth)` -- 
+* `_.occupy(origin, obj, depth)` -- 
+* `_.defaults(origin, obj1, obj2, ..., depth)` -- 
+* `_.config(cfg, opt, DEFAULT_CFG)` -- 
+* `_.unique(list)` -- 
+
+#### mo/lang/oop
+
+```javascript 
+var _ = require('mo/lang/oop');
+```
+
+* `_.construct(base, /*mixes,*/ factory)` -- 
+
+#### mo/lang/struct
+
+```javascript 
+var _ = require('mo/lang/struct');
+```
+
+* `_.index(array, key)` -- 
+* `_.fnQueue()` -- 
 
 ### mo/domready
 
@@ -130,11 +170,26 @@ cookie(name, value, {
 var tpl = require('mo/template');
 ```
 
+* `tpl.str2html(string)` -- 
+* same as below
+
+#### mo/template/string
+
+```javascript 
+var tpl = require('mo/template/string');
+```
+
+* `tpl.format(string, dict|list)` -- 
 * `tpl.escapeHTML(string)` -- 
 * `tpl.substr(string, limit, callback)` -- 
 * `tpl.strsize(string)` -- 
-* `tpl.str2html(string)` -- 
-* `tpl.format(string, dict|list)` -- 
+
+#### mo/template/micro
+
+```javascript 
+var tpl = require('mo/template/micro');
+```
+
 * `tpl.convertTpl(tplName|tplString, dictData, namespace)` -- 
 * `tpl.reloadTpl(tplName)` -- 
 
@@ -144,12 +199,20 @@ var tpl = require('mo/template');
 var net = require('mo/network');
 ```
 
-* `net.ajax(options)` -- 
-* `net.params(data)` -- 
 * `net.getScript(url, callback)` -- 
 * `net.getStyle(url)` -- 
 * `net.getJSON(url, params, callback, options)` -- 
 * `net.getRequest(url, params)` -- 
+* same as below
+
+#### mo/network/ajax
+
+```javascript 
+var net = require('mo/network/ajax');
+```
+
+* `net.ajax(options)` -- 
+* `net.params(data)` -- 
 
 ### mo/easing
 

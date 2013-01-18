@@ -20,11 +20,7 @@
         "oz",
         "ozjs"
     ],
-    "version": "1.0.1",
-    "volo": {
-        "dependencies": {
-        }
-    },
+    "version": "1.1.0",
     "dependencies": {
 
     }
