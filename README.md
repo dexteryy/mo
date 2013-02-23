@@ -7,7 +7,20 @@ title: Mo
 
 > * A collection of OzJS core modules that form a library called "Mo" 
 
-## AMD and OzJS
+## Install (In NodeJS)
+
+```
+npm install mo
+```
+
+## Download (In browser)
+
+* [Download on Github](https://github.com/dexteryy/mo/)
+* Add to your project as new dependency:
+    * via [istatic](https://github.com/mockee/istatic.git)
+    * via [volo](https://github.com/volojs/volo)
+
+### AMD and OzJS
 
 * Mo can either be viewed as an independent library, or as a part of [OzJS mirco-framework](http://ozjs.org/#framework).
 * It's wrapped as a number of mutually independent [AMD (Asynchronous Module Definition)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules. You should use them with [oz.js](http://ozjs.org/#start) (or require.js or [similar](http://wiki.commonjs.org/wiki/Implementations) for handling dependencies). 
@@ -48,13 +61,6 @@ title: Mo
 ## Examples
 
 * [demo for mo/lang](http://ozjs.org/mo/examples/lang)
-
-## Get the code
-
-* [View/download on Github](https://github.com/dexteryy/mo/blob/master/)
-* Add/update to your project as new dependency:
-    * via [istatic](https://github.com/mockee/istatic.git)
-    * via [volo](https://github.com/volojs/volo)
 
 ## API and usage
 
@@ -284,7 +290,7 @@ Under construction...
 
 ## More References
 
-See [OzJS References](http://ozjs.org/#ref)
+See [OzJS Project Homepage](http://ozjs.org/)
 
 ## Release History
 
