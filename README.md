@@ -7,18 +7,13 @@ title: Mo
 
 > * A collection of OzJS core modules that form a library called "Mo" 
 
-## Install (In NodeJS)
+## In NodeJS
 
 ```
 npm install mo
 ```
 
-## Download (In browser)
-
-* [Download on Github](https://github.com/dexteryy/mo/)
-* Add to your project as new dependency:
-    * via [istatic](https://github.com/mockee/istatic.git)
-    * via [volo](https://github.com/volojs/volo)
+## In browser
 
 ### AMD and OzJS
 
@@ -26,6 +21,13 @@ npm install mo
 * It's wrapped as a number of mutually independent [AMD (Asynchronous Module Definition)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules. You should use them with [oz.js](http://ozjs.org/#start) (or require.js or [similar](http://wiki.commonjs.org/wiki/Implementations) for handling dependencies). 
 * If you want to make them available for both other AMD code and traditional code based on global namespace. OzJS provides [a mini define/require implementation](http://ozjs.org/examples/adapter/) to transform AMD module into traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth).
 * See [http://ozjs.org](http://ozjs.org) for details.
+
+### Get the Code
+
+* [Download on Github](https://github.com/dexteryy/mo/)
+* Add to your project as new dependency:
+    * via [istatic](http://ozjs.org/istatic)
+    * via [volo](https://github.com/volojs/volo)
 
 ## Modules Overview
 
