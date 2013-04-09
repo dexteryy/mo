@@ -59,6 +59,8 @@ npm install mo
 * [mo/key](https://github.com/dexteryy/mo/blob/master/key.js): 
     * Wrapping API for keyboard events
     * Support key sequence, multiple key press, ...
+* [mo/console](https://github.com/dexteryy/mo/blob/master/console.js): 
+    * Forwarding output of console API
 
 ## Examples
 
@@ -155,9 +157,13 @@ var browsers = require('mo/browsers');
 
 * `browsers.browser` --
 * `browsers.version` -- 
+* `browsers.engine` -- 
+* `browsers.engineversion` -- 
+* `browsers.os` -- 
+* `browsers.osversion` -- 
 * `browsers.skin` -- 
 * `browsers.rank` -- 
-* `browsers['msie'|'webkit'|'mozilla'|...]` --
+* `browsers['msie'|'safari'|'mobilesafari'|'chrome'|'aosp'|'mozilla'|...]` --
 
 ### mo/cookie
 
@@ -211,6 +217,7 @@ var net = require('mo/network');
 * `net.getStyle(url)` -- 
 * `net.getJSON(url, params, callback, options)` -- 
 * `net.getRequest(url, params)` -- 
+* `net.parseJSON(data)` -- 
 * same as below
 
 #### mo/network/ajax
@@ -287,6 +294,21 @@ var key = Key(config);
 * `key.enable()` -- 
 * `key.disable()` -- 
 * `key.check()` -- 
+
+### mo/console
+
+```javascript 
+var console = require('mo/console');
+```
+
+* `console.config({ output: elm })` -- 
+* `console.enable()` -- 
+* `console.disable()` -- 
+* `console.run(func)` -- 
+* `console.log(sth, sth, ...)` -- 
+* `console.info(sth, sth, ...)` -- 
+* `console.warn(sth, sth, ...)` -- 
+* `console.error(sth, sth, ...)` -- 
 
 Under construction...
 
