@@ -9,7 +9,8 @@
  */
 define("mo/browsers", [], function(){
 
-    var match, skin, os,
+    var match, skin, os, is_mobile,
+        ua = this.navigator.userAgent.toLowerCase(),
         rank = { 
             "360ee": 2,
             "maxthon/3": 2,
@@ -22,8 +23,7 @@ define("mo/browsers", [], function(){
         };
 
     try {
-        var ua = this.navigator.userAgent.toLowerCase(),
-            rwindows = /(windows) nt ([\w.]+)/,
+        var rwindows = /(windows) nt ([\w.]+)/,
             rmac = /(mac) os \w+ ([\w.]+)/,
             riphone = /(iphone) os ([\w._]+)/,
             ripad = /(ipad) os ([\w.]+)/,
@@ -41,17 +41,18 @@ define("mo/browsers", [], function(){
             rtheworld = /(theworld)/,
             rmaxthon3 = /(maxthon\/3)/,
             rmaxthon = /(maxthon)/,
+            rwechat = /(micromessenger)/,
             rtt = /(tencenttraveler)/,
             rqq = /(qqbrowser)/,
             rbaidu = /(baidubrowser)/,
             ruc = /(ucbrowser)/,
             rmetasr = /(metasr)/;
 
-        os = rwindows.exec(ua) 
-            || rmac.exec(ua) 
-            || riphone.exec(ua) 
+        os = riphone.exec(ua) 
             || ripad.exec(ua) 
             || randroid.exec(ua) 
+            || rmac.exec(ua) 
+            || rwindows.exec(ua) 
             || [];
 
         match =  rwebkit.exec(ua) 
@@ -60,8 +61,10 @@ define("mo/browsers", [], function(){
             || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
             || [];
 
+        is_mobile = rmobilesafari.exec(ua);
+
         if (match[1] === 'webkit') {
-            var vendor = rmobilesafari.exec(ua) || rsafari.exec(ua);
+            var vendor = is_mobile || rsafari.exec(ua);
             if (vendor) {
                 match[3] = match[1];
                 match[4] = match[2];
@@ -84,6 +87,7 @@ define("mo/browsers", [], function(){
             || rtheworld.exec(ua) 
             || rmaxthon3.exec(ua) 
             || rmaxthon.exec(ua) 
+            || rwechat.exec(ua)
             || rtt.exec(ua) 
             || rqq.exec(ua) 
             || rbaidu.exec(ua) 
@@ -102,7 +106,10 @@ define("mo/browsers", [], function(){
         engineversion: match[4] || "0",
         os: os[1],
         osversion: os[2] || "0",
-        skin: skin[1] || ""
+        isMobile: os[1] === 'iphone'
+            || os[1] === 'android' && !!is_mobile,
+        skin: skin[1] || "",
+        ua: ua
     };
 
     if (result.os === 'android' && !result.browser) {

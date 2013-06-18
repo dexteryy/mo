@@ -161,8 +161,10 @@ var browsers = require('mo/browsers');
 * `browsers.engineversion` -- 
 * `browsers.os` -- 
 * `browsers.osversion` -- 
+* `browsers.isMobile` -- 
 * `browsers.skin` -- 
 * `browsers.rank` -- 
+* `browsers.ua` -- 
 * `browsers['msie'|'safari'|'mobilesafari'|'chrome'|'aosp'|'mozilla'|...]` --
 
 ### mo/cookie

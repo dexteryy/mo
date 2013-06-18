@@ -1,9 +1,9 @@
 
 define('mo/console', [
-    'mo/lang',
-    'mo/browsers',
-    'mo/template/string',
-    'mo/domready'
+    './lang',
+    './browsers',
+    './template/string',
+    './domready'
 ], function(_, browsers, tpl){
 
     var console = this.console = this.console || {},
@@ -15,15 +15,26 @@ define('mo/console', [
         },
         RE_CODE = /^function[^(]*\([^)]*\)[^{]*\{([.\s\S]*)\}$/;
 
+    console._ccBuffer = [];
+
     console.config = function(opt){
-        this.output = opt.output;
+
+        if (opt.output) {
+            this._ccOutput = opt.output;
+            this._ccOutput.innerHTML = this._ccBuffer.join('');
+        }
+
+        if (opt.record !== undefined) {
+            this._recording = opt.record;
+            if (!opt.record) {
+                console.cc();
+            }
+        }
+
         return this;
     };
 
     console.enable = function(){
-        if (!this.output) {
-            this.output = default_output();
-        }
         for (var i in origin_console) {
             console[i] = console_api(i);
         }
@@ -37,6 +48,24 @@ define('mo/console', [
         }
         console.run = console.log;
         return this;
+    };
+
+    console.cc = function(newlog){
+        if (newlog === undefined) {
+            return this._ccBuffer.join('');
+        } else {
+            this._ccBuffer.push(newlog);
+            var result = this._ccBuffer.join('');
+            if (!this._recording) {
+                //if (!this._ccOutput) {
+                    //this._ccOutput = default_output();
+                //}
+                if (this._ccOutput) {
+                    this._ccOutput.innerHTML = result;
+                }
+            }
+            return result;
+        }
     };
 
     function run(fn, opt){
@@ -59,25 +88,21 @@ define('mo/console', [
             if (_.isFunction(origin_console[method])) {
                 origin_console[method].apply(console, arguments);
             }
-            var output = this.output = this.output || default_output(),
-                content = output.innerHTML,
-                result = content && /\S/.test(content) ? [content] : [];
-            result.push.call(result, '<p>'
+            console.cc('<p>'
                 + '<span class="type type-' + method + '"></span>'
                 + '<span class="log">'
                 + Array.prototype.slice.call(arguments)
                     .map(escape_log, method).join('</span><span class="log">')
                 + '</span></p>');
-            output.innerHTML = result.join('');
         };
     }
 
-    function default_output(){
-        var output = document.createElement('DIV');
-        output.setAttribute('id', 'console');
-        document.body.insertBefore(output, document.body.firstChild);
-        return output;
-    }
+    //function default_output(){
+        //var output = document.createElement('DIV');
+        //output.setAttribute('id', 'console');
+        //document.body.insertBefore(output, document.body.firstChild);
+        //return output;
+    //}
 
     function escape_log(text){
         var method = this;
