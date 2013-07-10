@@ -1,0 +1,17 @@
+{
+  "name": "mo",
+  "description": "A collection of OzJS core modules that form a library called \"Mo\"",
+  "version": "1.5.2",
+  "dependencies": {
+  },
+  "ignore": [
+    "dest",
+    "npmpackage",
+    "Gruntfile.js",
+    "node_modules",
+    "components",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
