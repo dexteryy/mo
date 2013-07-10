@@ -24,10 +24,12 @@ npm install mo
 
 ### Get the Code
 
-* [Download on Github](https://github.com/dexteryy/mo/)
-* Add to your project as new dependency:
-    * via [bower](http://bower.io/) - `bower install mo`
-    * via [istatic](http://ozjs.org/istatic)
+Add to your project as new dependency
+
+* via [bower](http://bower.io/) - `bower install mo`
+* via [istatic](http://ozjs.org/istatic)
+
+Or [download directly from Github](https://github.com/dexteryy/mo/)
 
 ## Modules Overview
 
