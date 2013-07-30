@@ -15,7 +15,7 @@
         "type": "MIT",
         "url": "http://www.opensource.org/licenses/mit-license.php"
     }],
-    "version": "1.5.2",
+    "version": "1.5.3",
     "engines": {
         "node": ">=0.8.0"
     },
