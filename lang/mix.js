@@ -61,11 +61,11 @@ define("mo/lang/mix", [
         for (var n = 1; n < ol; n++) {
             obj = objs[n];
             if (typeof obj !== 'object') {
-              continue;
+                continue;
             }
             if (Array.isArray(origin)) {
                 if (!Array.isArray(obj)) {
-                  continue;
+                    continue;
                 }
                 origin = origin || [];
                 lib = {};
@@ -123,7 +123,13 @@ define("mo/lang/mix", [
         }
         for (var n = 1; n < ol; n++) {
             obj = objs[n];
+            if (typeof obj !== 'object') {
+                continue;
+            }
             if (Array.isArray(origin)) {
+                if (!Array.isArray(obj)) {
+                    continue;
+                }
                 origin = origin || [];
                 lib = {};
                 marked = [];
