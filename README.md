@@ -130,9 +130,16 @@ var _ = require('mo/lang/mix');
 
 ```javascript 
 var _ = require('mo/lang/oop');
-```
 
-* `_.construct(base, /*mixes,*/ factory)` -- 
+var List = _.construct(Array, /*mixes, */function(){
+    this.superConstructor.apply(this, arguments);
+    this.a = 1;
+});
+
+List.prototype.forEach = function(){
+    return this.superMethod('forEach', arguments);
+};
+```
 
 #### mo/lang/struct
 
