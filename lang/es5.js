@@ -155,8 +155,8 @@ define("mo/lang/es5", [], function(){
         trimRight = /[\s\xA0]+$/;
     }
     if (!String.prototype.trim) {
-        String.prototype.trim = function(text) {
-            return text == null ?  "" : text.toString().replace(trimLeft, "").replace(trimRight, "");
+        String.prototype.trim = function() {
+            return this.replace(trimLeft, "").replace(trimRight, "");
         };
     }
 

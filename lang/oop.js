@@ -15,6 +15,7 @@ define("mo/lang/oop", [
     exports.construct = function(base, mixes, factory){
         if (mixes && !Array.isArray(mixes)) {
             factory = mixes;
+            mixes = null;
         }
         if (!factory) {
             factory = function(){
