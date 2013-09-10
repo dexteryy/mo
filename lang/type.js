@@ -30,7 +30,7 @@ define("mo/lang/type", [
     };
 
     exports.isWindow = function(obj) {
-        return "setInterval" in obj;
+		return obj && obj === obj.window;
     };
 
 	exports.isEmptyObject = function(obj) {
@@ -40,5 +40,15 @@ define("mo/lang/type", [
         }
         return true;
 	};
+
+    exports.isArraylike = function(obj){
+        var l = obj.length;
+        return !exports.isWindow(obj) 
+            && typeof obj !== 'function'
+            && (l === 0 
+                || typeof l === "number"
+                && l > 0 
+                && (l - 1) in obj);
+    };
 
 });

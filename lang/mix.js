@@ -198,5 +198,25 @@ define("mo/lang/mix", [
         return merge(origin, [], lvl);
     };
 
+    exports.each = function(obj, fn, context){
+        var i = 0, l = obj.length, re;
+        if (_.isArraylike(obj)) {
+            for (; i < l; i++) {
+                re = fn.call(context, i, obj[i]);
+                if (re === false) {
+                    break;
+                }
+            }
+        } else {
+            for (i in obj) {
+                re = fn.call(context, i, obj[i]);
+                if (re === false) {
+                    break;
+                }
+            }
+        }
+        return obj;
+    };
+
 });
 
