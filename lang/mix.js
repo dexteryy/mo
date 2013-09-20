@@ -202,14 +202,14 @@ define("mo/lang/mix", [
         var i = 0, l = obj.length, re;
         if (_.isArraylike(obj)) {
             for (; i < l; i++) {
-                re = fn.call(context, i, obj[i]);
+                re = fn.call(context, obj[i], i);
                 if (re === false) {
                     break;
                 }
             }
         } else {
             for (i in obj) {
-                re = fn.call(context, i, obj[i]);
+                re = fn.call(context, obj[i], i);
                 if (re === false) {
                     break;
                 }
