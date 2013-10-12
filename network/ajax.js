@@ -39,6 +39,8 @@ define("mo/network/ajax", [
             complete: s.complete || function(){},
             handleError: s.handleError || function(){},
             success: s.success || function(){},
+            xhrFields: s.xhrFields || {},
+            headers: s.headers || {},
             accepts: {
                 xml: "application/xml, text/xml",
                 html: "text/html",
