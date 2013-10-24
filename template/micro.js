@@ -41,7 +41,7 @@ define("mo/template/micro", [
                 }
             }
         } else {
-            func = new Function(namespace || 'obj', 'api', 'var __p=[];' 
+            var tplfunc = new Function(namespace || 'obj', 'api', 'var __p=[];' 
                 + (namespace ? '' : 'with(obj){')
                     + 'var mix=api.mix,escapeHTML=api.escapeHTML,substr=api.substr,include=api.include,has=api._has(' + (namespace || 'obj') + ');'
                     + '__p.push(\'' +
@@ -61,8 +61,11 @@ define("mo/template/micro", [
                     + "');" 
                 + (namespace ? "" : "}")
                 + "return __p.join('');");
+            func = function(data, helpers){
+                return tplfunc.call(this, data, _.mix({}, exports.tplHelpers, helpers));
+            };
         }
-        return !func ? '' : (data ? func(data, exports.tplHelpers) : func);
+        return !func ? '' : (data ? func(data) : func);
     }
 
     exports.convertTpl = convertTpl;
