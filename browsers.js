@@ -9,7 +9,7 @@
  */
 define("mo/browsers", [], function(){
 
-    var match, skin, os, is_mobile, is_webview,
+    var match, skin, os, is_mobile_webkit, is_touch, is_webview,
         ua = this.navigator.userAgent.toLowerCase(),
         rank = { 
             "360ee": 2,
@@ -25,16 +25,19 @@ define("mo/browsers", [], function(){
     try {
         var rwindows = /(windows) nt ([\w.]+)/,
             rmac = /(mac) os \w+ ([\w.]+)/,
-            riphone = /(iphone) os ([\w._]+)/,
-            ripad = /(ipad) os ([\w.]+)/,
+            rwindowsphone = /(windows phone)[\sos]* ([\w.]+)/,
+            riphone = /(iphone).*? os ([\w.]+)/,
+            ripad = /(ipad).*? os ([\w.]+)/,
             randroid = /(android)[ ;]([\w.]*)/,
             rmobilewebkit = /(\w+)[ \/]([\w.]+)[ \/]mobile/,
             rsafari = /(\w+)[ \/]([\w.]+)[ \/]safari/,
             rmobilesafari = /[ \/]mobile.*safari/,
             rwebview = /[ \/]mobile/,
+            rtouch = / touch/,
             rwebkit = /(webkit)[ \/]([\w.]+)/,
             ropera = /(opera)(?:.*version)?[ \/]([\w.]+)/,
             rmsie = /(msie) ([\w.]+)/,
+            rie11 = /(trident).*? rv:([\w.]+)/,
             rmozilla = /(mozilla)(?:.*? rv:([\w.]+))?/;
 
         var r360se = /(360se)/,
@@ -54,6 +57,7 @@ define("mo/browsers", [], function(){
             || ripad.exec(ua) 
             || randroid.exec(ua) 
             || rmac.exec(ua) 
+            || rwindowsphone.exec(ua) 
             || rwindows.exec(ua) 
             || [];
 
@@ -74,14 +78,21 @@ define("mo/browsers", [], function(){
         match =  rwebkit.exec(ua) 
             || ropera.exec(ua) 
             || rmsie.exec(ua) 
+            || rie11.exec(ua)
             || ua.indexOf("compatible") < 0 && rmozilla.exec(ua) 
             || [];
 
-        is_mobile = rmobilesafari.exec(ua) 
+        is_mobile_webkit = rmobilesafari.exec(ua) 
             || (is_webview = rwebview.exec(ua));
 
+        is_touch = rtouch.exec(ua);
+
+        if (match[1] === 'trident') {
+            match[1] = 'msie';
+        }
+
         if (match[1] === 'webkit') {
-            var vendor = (is_mobile ? rmobilewebkit.exec(ua)
+            var vendor = (is_mobile_webkit ? rmobilewebkit.exec(ua)
                 : rsafari.exec(ua)) || [];
             match[3] = match[1];
             match[4] = match[2];
@@ -111,7 +122,12 @@ define("mo/browsers", [], function(){
         os: os[1],
         osversion: os[2] || "0",
         isMobile: os[1] === 'iphone'
-            || os[1] === 'android' && !!is_mobile,
+            || os[1] === 'windows phone'
+            || os[1] === 'android' && !!is_mobile_webkit,
+        isTouch: os[1] === 'iphone'
+            || os[1] === 'windows phone'
+            || os[1] === 'android'
+            || os[1] === 'windows' && is_touch,
         skin: skin[1] || "",
         ua: ua
     };
