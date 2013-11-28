@@ -21,6 +21,20 @@ define("mo/network/ajax", [
         return s.join("&").replace(/%20/g, "+");
     };
 
+    exports.parseJSON = function(json){
+        json = json
+            .replace(/^[\w(<\/*!\s]*?\{/, '{')
+            .replace(/[^\}]*$/, '');
+        try {
+            json = window.JSON && window.JSON.parse 
+                ? window.JSON.parse(json) 
+                : window["eval"](json);
+        } catch(ex) {
+            json = false;
+        }
+        return json;
+    };
+
     /**
      * From jquery by John Resig
      */ 
@@ -133,9 +147,11 @@ define("mo/network/ajax", [
             if ( xml && data.documentElement.tagName == "parsererror" )
                 throw "parsererror";
             if ( type == "script" )
-                eval.call( window, data );
+                (window.execScript || function(data){
+                    window["eval"].call(window, data);
+                })(data);
             if ( type == "json" )
-                data = eval("(" + data + ")");
+                data = exports.parseJSON(data);
             return data;
         }
         return xhr;

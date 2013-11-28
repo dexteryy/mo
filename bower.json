@@ -1,7 +1,7 @@
 {
   "name": "mo",
   "description": "A collection of OzJS core modules that form a library called \"Mo\"",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "dependencies": {
   },
   "ignore": [
