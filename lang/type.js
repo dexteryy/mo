@@ -44,7 +44,8 @@ define("mo/lang/type", [
     exports.isArraylike = function(obj){
         var l = obj.length;
         return !exports.isWindow(obj) 
-            && typeof obj !== 'function'
+            && (typeof obj !== 'function' 
+                || obj.constructor !== Function)
             && (l === 0 
                 || typeof l === "number"
                 && l > 0 
