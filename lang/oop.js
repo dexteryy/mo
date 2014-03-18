@@ -28,8 +28,9 @@ define("mo/lang/oop", [
         }
         var proto = Object.create(base.prototype),
             supr = Object.create(base.prototype),
-            current_supr = supr;
+            current_supr = {};
         supr.__super = base.__supr;
+        supr.__self = base.prototype;
         var sub = function(){
             this.superMethod = sub.__superMethod;
             this.superConstructor = su_construct;
@@ -40,10 +41,23 @@ define("mo/lang/oop", [
         sub.__supr = supr;
         sub.__constructor = sub;
         sub.__superMethod = function(name, args){
-            var mysupr = current_supr;
-            current_supr = mysupr.__super;
-            var re = mysupr[name].apply(this, args);
-            current_supr = mysupr;
+            var tm = {}, re = tm,
+                last_supr = current_supr[name];
+            if (!last_supr) {
+                current_supr[name] = supr;
+                if (!sub.prototype.hasOwnProperty(name)) {
+                    re = this.superMethod.apply(this, arguments);
+                }
+            } else {
+                current_supr[name] = last_supr.__super;
+                if (!last_supr.__self.hasOwnProperty(name)) {
+                    re = this.superMethod.apply(this, arguments);
+                }
+            }
+            if (re === tm) {
+                re = current_supr[name][name].apply(this, args);
+            }
+            current_supr[name] = last_supr;
             return re;
         };
         sub.prototype = proto;
