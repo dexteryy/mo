@@ -260,12 +260,16 @@ if (!Object.keys) {
 }
 
 if (!Object.create) {
-    Object.create = function(obj) {
-        function NewObj(){}
-        NewObj.prototype = obj;
-        var new_obj = new NewObj();
-        new_obj.__proto__ = obj;
-        return new_obj;
+    var Temp = function(){};
+    Object.create = function(proto, des) {
+        Temp.prototype = proto;
+        var obj = new Temp();
+        for (var key in des) {
+            obj[key] = des[key].value;
+        }
+        obj.__proto__ = proto;
+        obj.constructor = Object;
+        return obj;
     };
 }
 
