@@ -8,7 +8,7 @@
  * vim: et:ts=4:sw=4:sts=4
  */
 define("mo/lang", [
-    "./lang/es5",
+    "./lang/es6",
     "./lang/type",
     "./lang/mix",
     "./lang/struct",
