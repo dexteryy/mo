@@ -2,20 +2,19 @@
  * Copyright (C) 2010-2014, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define("mo/lang/es5", [], factory);
-    } else {
+if (typeof module === 'undefined' 
+        && (typeof define !== 'function' || !define.amd)) {
+    define = function(mid, deps, factory){
         factory();
-    }
-}(this, function(){
+    };
+}
+define("mo/lang/es5", [], function(){
 
 var host = this,
     Array = host.Array,
     String = host.String,
     Object = host.Object,
     Function = host.Function,
-    //window = host.window,
     _objproto = Object.prototype,
     _arrayproto = Array.prototype,
     _stringproto = String.prototype,
@@ -206,7 +205,7 @@ if (!Array.isArray) {
 }
 
 // modified from es-shims/es5-shim
-var ws = "\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
+var ws = "\x09\x0A\x0B\x0C\x0D \xA0\u1680\u180E\u2000\u2001\u2002\u2003" +
     "\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028" +
     "\u2029\uFEFF";
 var zeroWidth = '\u200b';
@@ -228,8 +227,8 @@ if (!_stringproto.trim || ws.trim() || !zeroWidth.trim()) {
 
 // modified from es-shims/es5-shim
 // ES-5 15.1.2.2
-if (parseInt(ws + '08') !== 8 || parseInt(ws + '0x16') !== 22) {
-    window.parseInt = (function(origParseInt){
+if (parseInt(ws + '08', 10) !== 8 || parseInt(ws + '0x16', 16) !== 22) {
+    host.parseInt = (function(origParseInt){
         var hexRegex = /^0[xX]/;
         return function parseIntES5(str, radix) {
             str = String(str).trim();
@@ -286,4 +285,4 @@ if (!Object.getPrototypeOf) {
     };
 }
 
-}));
+});

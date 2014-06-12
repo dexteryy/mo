@@ -2,16 +2,18 @@
  * Copyright (C) 2010-2014, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define("mo/lang/es6-promise", [], factory);
-    } else {
+if (typeof module === 'undefined' 
+        && (typeof define !== 'function' || !define.amd)) {
+    define = function(mid, deps, factory){
         factory();
-    }
-}(this, function(){
+    };
+}
+define("mo/lang/es6-promise", [], function(){
 
-if (window.Promise) {
-    return window.Promise;
+var host = this;
+
+if (host.Promise) {
+    return host.Promise;
 }
 
 // forked from jakearchibald/es6-promise
@@ -201,17 +203,19 @@ Promise.all = function(promises){
     }
     return new this(function(onFulfilled, onRejected) {
         var results = [],
+            promise,
             remaining = promises.length;
         if (remaining === 0) {
             onFulfilled([]);
         }
-        promises.forEach(function(promise, i){
+        for (var i = 0; i < promises.length; i++) {
+            promise = promises[i];
             if (promise && is_function(promise.then)) {
                 promise.then(track(i), onRejected);
             } else {
                 mark(i, promise);
             }
-        });
+        }
         function track(index) {
             return function(value) {
                 mark(index, value);
@@ -231,13 +235,15 @@ Promise.race = function(promises){
         throw new TypeError('You must pass an array to race.');
     }
     return new this(function(resolve, reject) {
-        promises.forEach(function(promise){
+        var promise;
+        for (var i = 0; i < promises.length; i++) {
+            promise = promises[i];
             if (promise && is_function(promise.then)) {
                 promise.then(resolve, reject);
             } else {
                 resolve.call(promise);
             }
-        });
+        }
     });
 };
 
@@ -251,6 +257,6 @@ function is_function(x) {
     return typeof x === "function";
 }
 
-return window.Promise = Promise;
+return host.Promise = Promise;
 
-}));
+});

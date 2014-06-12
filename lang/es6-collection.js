@@ -2,13 +2,13 @@
  * Copyright (C) 2010-2014, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define("mo/lang/es6", ["mo/lang/es6-utils"], factory);
-    } else {
+if (typeof module === 'undefined' 
+        && (typeof define !== 'function' || !define.amd)) {
+    define = function(mid, deps, factory){
         factory();
-    }
-}(this, function(){
+    };
+}
+define("mo/lang/es6-collection", ["./es6-utils"], function(_0, require, exports){
 
 var host = this,
     Object = host.Object,
@@ -168,8 +168,6 @@ function collection_check(keys, key, only_object) {
     return i;
 }
 
-collection_del; // for jshint
-
 if (!host.Map) {
     host.Map = Map;
 }
@@ -186,4 +184,9 @@ if (!host.WeakSet) {
     host.WeakSet = WeakSet;
 }
 
-}));
+exports.Map = Map;
+exports.Set = Set;
+exports.WeakMap = WeakMap;
+exports.WeakSet = WeakSet;
+
+});

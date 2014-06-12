@@ -2,13 +2,13 @@
  * Copyright (C) 2010-2014, Dexter.Yy, MIT License
  * vim: et:ts=4:sw=4:sts=4
  */
-(function(root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        define("mo/lang/es6", ["mo/lang/es5"], factory);
-    } else {
+if (typeof module === 'undefined' 
+        && (typeof define !== 'function' || !define.amd)) {
+    define = function(mid, deps, factory){
         factory();
-    }
-}(this, function(){
+    };
+}
+define("mo/lang/es6-utils", ["./es5"], function(es5){
 
 var host = this,
     Array = host.Array,
@@ -72,14 +72,14 @@ if (_arrayproto.copyWithin) {
     _arrayproto.copyWithin = function(target, start /*, end*/) {
         var O = Object(this);
         var len = O.length >>> 0;
-        var relativeTarget = parseInt(target);
+        var relativeTarget = parseInt(target, 10);
         var to = relativeTarget < 0 ? Math.max(len + relativeTarget, 0)
             : Math.min(relativeTarget, len);
-        var relativeStart = parseInt(start);
+        var relativeStart = parseInt(start, 10);
         var from = relativeStart < 0 ? Math.max(len + relativeStart, 0)
             : Math.min(relativeStart, len);
         var end = arguments[2];
-        var relativeEnd = end === undefined ? len : parseInt(end);
+        var relativeEnd = end === undefined ? len : parseInt(end, 10);
         var final = relativeEnd < 0 ? Math.max(len + relativeEnd, 0)
             : Math.min(relativeEnd, len);
         var count = Math.min(final - from, len - to);
@@ -294,4 +294,4 @@ if (!Object.assign) {
     };
 }
 
-}));
+});

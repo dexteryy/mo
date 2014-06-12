@@ -76,7 +76,7 @@ module.exports = function(grunt) {
                 "immed": true,                 // Require immediate invocations to be wrapped in parens e.g. `( function(){}() );`
                 "noarg": true,                 // Prohibit use of `arguments.caller` and `arguments.callee`.
                 "undef": true,                 // Require all non-global variables be declared before they are used.
-                "unused": true,                // warns when you define and never use your variables.
+                "unused": false,                // warns when you define and never use your variables.
                 "trailing": false,             // makes it an error to leave a trailing whitespace in your code
                 "boss": true,                  // Tolerate assignments inside if, for & while. Usually conditions & loops are for comparison, not assignments.
                 "evil": true,                  // Tolerate use of `eval`.
