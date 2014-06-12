@@ -15,27 +15,30 @@ npm install mo
 
 ## In browser
 
-### AMD and OzJS
-
-* Mo can either be viewed as an independent library, or as a part of [OzJS mirco-framework](http://ozjs.org/#framework).
-* It's wrapped as a number of mutually independent [AMD (Asynchronous Module Definition)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules. You should use them with [oz.js](http://ozjs.org/#start) (or require.js or [similar](http://wiki.commonjs.org/wiki/Implementations) for handling dependencies). 
-* If you want to make them available for both other AMD code and traditional code based on global namespace. OzJS provides [a mini define/require implementation](http://ozjs.org/examples/adapter/) to transform AMD module into traditional [module pattern](http://www.adequatelygood.com/2010/3/JavaScript-Module-Pattern-In-Depth).
-* See [http://ozjs.org](http://ozjs.org) for details.
-
-### Get the Code
-
-Add to your project as new dependency
-
-* via [bower](http://bower.io/) - `bower install mo`
-* via [istatic](http://ozjs.org/istatic)
+```
+bower install mo
+```
 
 Or [download directly from Github](https://github.com/dexteryy/mo/)
+
+### AMD and OzJS
+
+* Mo is wrapped as a number of mutually independent [AMD (Asynchronous Module Definition)](https://github.com/amdjs/amdjs-api/wiki/AMD) modules. You should use them with [oz.js](http://ozjs.org/#start) (or require.js or [similar](http://wiki.commonjs.org/wiki/Implementations) for handling dependencies). 
+* See [http://ozjs.org](http://ozjs.org) for details.
 
 ## Modules Overview
 
 * [mo/lang](https://github.com/dexteryy/mo/blob/master/lang.js): 
     * ES5/6 shim and minimum utilities for language enhancement
     * [mo/lang/es5](https://github.com/dexteryy/mo/blob/master/lang/es5.js)
+        * Array + String + Object + Function + Date API shims
+    * [mo/lang/es6](https://github.com/dexteryy/mo/blob/master/lang/es6.js)
+        * [mo/lang/es6-utils](https://github.com/dexteryy/mo/blob/master/lang/es6-utils.js)
+            * Array + String + Number + Object API shims
+        * [mo/lang/es6-collection](https://github.com/dexteryy/mo/blob/master/lang/es6-collection.js)
+            * Map + Set + WeakMap + WeakSet shims
+        * [mo/lang/es6-promise](https://github.com/dexteryy/mo/blob/master/lang/es6-promise.js)
+            * Promise shim
     * [mo/lang/type](https://github.com/dexteryy/mo/blob/master/lang/type.js)
     * [mo/lang/mix](https://github.com/dexteryy/mo/blob/master/lang/mix.js)
     * [mo/lang/oop](https://github.com/dexteryy/mo/blob/master/lang/oop.js)
@@ -82,23 +85,102 @@ var _ = require('mo/lang');
 #### mo/lang/es5
 
 ```javascript 
-require('mo/lang/es5'); // Add ES5 methods in browsers that don't natively support them
+require('mo/lang/es5');
 ```
 
 * `Array.prototype.forEach`
 * `Array.prototype.map`
 * `Array.prototype.filter`
 * `Array.prototype.reduce`
+* `Array.prototype.reduceRight`
 * `Array.prototype.some`
 * `Array.prototype.every`
 * `Array.prototype.indexOf`
 * `Array.prototype.lastIndexOf`
 * `Array.isArray`
 * `String.prototype.trim`
+* `Date.now`
 * `Object.keys`
-* `Object.create`
+* `Object.create` - partial support: `Object.create(obj)` / `Object.create(obj, { method: { value: func } })`
 * `Object.getPrototypeOf`
 * `Function.prototype.bind`
+
+#### mo/lang/es6
+
+```javascript 
+require('mo/lang/es6');
+```
+
+* same as `mo/lang/es6-utils` + `mo/lang/es6-collection` + `mo/lang/es6-promise`
+
+#### mo/lang/es6-utils
+
+```javascript 
+require('mo/lang/es6-utils');
+```
+
+* `Array.prototype.find`
+* `Array.prototype.findIndex`
+* `Array.prototype.fill`
+* `Array.prototype.copyWithin`
+* `Array.of`
+* `Array.from`
+* `String.prototype.startsWith`
+* `String.prototype.endsWith`
+* `String.prototype.contains`
+* `String.prototype.repeat`
+* `Number.MAX_SAFE_INTEGER`
+* `Number.MIN_SAFE_INTEGER`
+* `Number.EPSILON`
+* `Number.isFinite`
+* `Number.isInteger`
+* `Number.isSafeInteger`
+* `Number.isNaN`
+* `Object.is`
+* `Object.assign`
+
+#### mo/lang/es6-collection
+
+```javascript 
+require('mo/lang/es6-collection');
+```
+
+* `Map.prototype.get`
+* `Map.prototype.set`
+* `Map.prototype.delete`
+* `Map.prototype.clear`
+* `Map.prototype.size`
+* `Map.prototype.forEach`
+* `Map.prototype.has`
+* `WeakMap.prototype.get`
+* `WeakMap.prototype.set`
+* `WeakMap.prototype.delete`
+* `WeakMap.prototype.clear`
+* `WeakMap.prototype.has`
+* `Set.prototype.add`
+* `Set.prototype.delete`
+* `Set.prototype.clear`
+* `Set.prototype.size`
+* `Set.prototype.forEach`
+* `Set.prototype.has`
+* `WeakSet.prototype.add`
+* `WeakSet.prototype.delete`
+* `WeakSet.prototype.clear`
+* `WeakSet.prototype.has`
+
+#### mo/lang/es6-promise
+
+```javascript 
+require('mo/lang/es6-promise');
+```
+
+* `new Promise(function(resolve, reject){})`
+* `Promise.prototype.then(onFulfilled, onRejected)`
+* `Promise.prototype.catch(onRejected)`
+* `Promise.resolve(result|thenable)`
+* `Promise.reject(reason)`
+* `Promise.all(promises)`
+* `Promise.race(promises)`
 
 #### mo/lang/type
 
@@ -110,6 +192,7 @@ var _ = require('mo/lang/type');
 * `_.isFunction(sth)` -- 
 * `_.isWindow(sth)` -- 
 * `_.isEmptyObject(sth)` -- 
+* `_.isArraylike(sth)` -- 
 
 #### mo/lang/mix
 
@@ -125,6 +208,7 @@ var _ = require('mo/lang/mix');
 * `_.defaults(origin, obj1, obj2, ..., depth)` -- 
 * `_.config(cfg, opt, DEFAULT_CFG)` -- 
 * `_.unique(list)` -- 
+* `_.each(obj, mapfn, context)` -- 
 
 #### mo/lang/oop
 
