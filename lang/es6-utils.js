@@ -68,7 +68,7 @@ if (!_arrayproto.fill) {
 }
 
 // modified from MDN
-if (_arrayproto.copyWithin) {
+if (!_arrayproto.copyWithin) {
     _arrayproto.copyWithin = function(target, start /*, end*/) {
         var O = Object(this);
         var len = O.length >>> 0;
@@ -165,7 +165,7 @@ if (!Array.from) {
 }
 
 // modified from paulmillr/es6-shim
-if (_stringproto.startsWith) {
+if (!_stringproto.startsWith) {
     _stringproto.startsWith = function(searchStr, startArg) {
         var thisStr = String(this);
         searchStr = String(searchStr);
@@ -175,7 +175,7 @@ if (_stringproto.startsWith) {
 }
 
 // modified from paulmillr/es6-shim
-if (_stringproto.endsWith) {
+if (!_stringproto.endsWith) {
     _stringproto.endsWith = function(searchStr, posArg) {
         var thisStr = String(this);
         searchStr = String(searchStr);
@@ -187,14 +187,14 @@ if (_stringproto.endsWith) {
 }
 
 // modified from paulmillr/es6-shim
-if (_stringproto.contains) {
+if (!_stringproto.contains) {
     _stringproto.contains = function(searchString, position) {
         return _string_indexof.call(this, searchString, position) !== -1;
     };
 }
 
 // modified from paulmillr/es6-shim
-if (_stringproto.repeat) {
+if (!_stringproto.repeat) {
     var repeat = function(s, times) {
         if (times < 1) {
             return '';

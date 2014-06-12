@@ -225,21 +225,6 @@ if (!_stringproto.trim || ws.trim() || !zeroWidth.trim()) {
     };
 }
 
-// modified from es-shims/es5-shim
-// ES-5 15.1.2.2
-if (parseInt(ws + '08', 10) !== 8 || parseInt(ws + '0x16', 16) !== 22) {
-    host.parseInt = (function(origParseInt){
-        var hexRegex = /^0[xX]/;
-        return function parseIntES5(str, radix) {
-            str = String(str).trim();
-            if (!Number(radix)) {
-                radix = hexRegex.test(str) ? 16 : 10;
-            }
-            return origParseInt(str, radix);
-        };
-    }(parseInt));
-}
-
 if (!Date.now) {
     Date.now = function now() {
         return new Date().getTime();
