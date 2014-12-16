@@ -6,9 +6,13 @@
  * vim: et:ts=4:sw=4:sts=4
  */
 define("mo/template/micro", [
-    "../lang",
+    "../lang/es5",
+    "../lang/type",
+    "../lang/mix",
     "./string"
-], function(_, stpl, require, exports){
+], function(_0, _1, _, stpl, require, exports){
+
+    _ = _.mix({}, _1, _);
 
     var document = this.document;
 

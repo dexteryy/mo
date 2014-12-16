@@ -1,10 +1,11 @@
 
 define('mo/console', [
-    './lang',
+    './lang/es5',
+    './lang/type',
     './browsers',
     './template/string',
     './domready'
-], function(_, browsers, tpl){
+], function(_0, _, browsers, tpl){
 
     var console = this.console = this.console || {},
         origin_console = {

@@ -8,10 +8,11 @@
  * vim: et:ts=4:sw=4:sts=4
  */
 define("mo/template", [
-    "./lang",
+    "./lang/es5",
+    "./lang/mix",
     "./template/string",
     "./template/micro"
-], function(_, stpl, microtpl, require, exports){
+], function(_0, _, stpl, microtpl, require, exports){
 
     _.mix(exports, stpl, microtpl);
 

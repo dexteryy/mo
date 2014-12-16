@@ -8,9 +8,13 @@
  * vim: et:ts=4:sw=4:sts=4
  */
 define("mo/network", [
-    "./lang", 
+    "./lang/es5", 
+    "./lang/type", 
+    "./lang/mix", 
     "./network/ajax"
-], function(_, exports){
+], function(_0, _1, _, exports){
+
+    _ = _.mix({}, _1, _);
 
     var window = this,
         uuid4jsonp = 1;

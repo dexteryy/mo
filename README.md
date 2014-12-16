@@ -79,7 +79,6 @@ Or [download directly from Github](https://github.com/dexteryy/mo/)
 var _ = require('mo/lang');
 ```
 
-* `_.ns(string, value)` -- 
 * same as below
 
 #### mo/lang/es5
@@ -193,6 +192,7 @@ var _ = require('mo/lang/type');
 * `_.isWindow(sth)` -- 
 * `_.isEmptyObject(sth)` -- 
 * `_.isArraylike(sth)` -- 
+* `_.ns(string, value)` -- 
 
 #### mo/lang/mix
 

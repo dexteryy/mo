@@ -13,26 +13,8 @@ define("mo/lang", [
     "./lang/mix",
     "./lang/struct",
     "./lang/oop"
-], function(es5, detect, _, struct, oo, require, exports){
-
-    var host = this,
-        window = host.window;
+], function(es5, detect, _, struct, oo){
 
     _.mix(exports, detect, _, struct, oo);
-
-    exports.ns = function(namespace, v, parent){
-        var i, p = parent || window, n = namespace.split(".").reverse();
-        while ((i = n.pop()) && n.length > 0) {
-            if (typeof p[i] === 'undefined') {
-                p[i] = {};
-            } else if (typeof p[i] !== "object") {
-                return false;
-            }
-            p = p[i];
-        }
-        if (typeof v !== 'undefined')
-            p[i] = v;
-        return p[i];
-    };
 
 });

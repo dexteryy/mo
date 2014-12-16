@@ -9,9 +9,13 @@
  * vim: et:ts=4:sw=4:sts=4
  */
 define("mo/mainloop", [
-    "./lang",
+    "./lang/es5",
+    "./lang/struct",
+    "./lang/mix",
     "./easing/base"
-], function(_, easing){
+], function(_0, _1, _, easing){
+
+    _ = _.mix({}, _1, _);
 
     var window = this,
         ANIMATE_FRAME = "RequestAnimationFrame",

@@ -17,7 +17,9 @@ define("mo/lang/type", [
     "./es5"
 ], function(_0, require, exports){
 
-var _toString = Object.prototype.toString,
+var host = this,
+    window = host.window,
+    _toString = Object.prototype.toString,
     _aproto = Array.prototype,
     _typeMap = {};
 
@@ -58,6 +60,21 @@ exports.isArraylike = function(obj){
             || typeof l === "number"
             && l > 0 
             && (l - 1) in obj);
+};
+
+exports.ns = function(namespace, v, parent){
+    var i, p = parent || window, n = namespace.split(".").reverse();
+    while ((i = n.pop()) && n.length > 0) {
+        if (typeof p[i] === 'undefined') {
+            p[i] = {};
+        } else if (typeof p[i] !== "object") {
+            return false;
+        }
+        p = p[i];
+    }
+    if (typeof v !== 'undefined')
+        p[i] = v;
+    return p[i];
 };
 
 });
