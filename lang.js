@@ -13,8 +13,8 @@ define("mo/lang", [
     "./lang/mix",
     "./lang/struct",
     "./lang/oop"
-], function(es5, detect, _, struct, oo){
+], function(_0, _1, _2, _3, _4, require, exports){
 
-    _.mix(exports, detect, _, struct, oo);
+_2.mix(exports, _1, _2, _3, _4);
 
 });
